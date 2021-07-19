@@ -40,8 +40,11 @@ app.post("/", function(req,res){
     }
     response.on("data",function(data){
           console.log(JSON.parse(data));
+
     });
+    console.log("check 1");
   });
+  console.log("check 2");
   request.write(memberDetailsJSON);
   request.end();
 });
@@ -58,3 +61,4 @@ app.listen(process.env.PORT || 3000,function(){
 
 // API key = 11e5ea12fde486b8d9059fbad9da6894-us6
 // list id = 3393ebf4a0
+// link for the app: https://secure-savannah-61727.herokuapp.com/
