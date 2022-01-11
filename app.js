@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const app = express();
 const https = require("https");
@@ -26,10 +27,10 @@ app.post("/", function(req,res){
    update_existing: true
    };
   var memberDetailsJSON = JSON.stringify(memberDetails);
-  var url = "https://us6.api.mailchimp.com/3.0/lists/3393ebf4a0";
+  var url = "https://us6.api.mailchimp.com/3.0/lists/"+process.env.LIST_ID;
   var options = {
     method: "POST",
-    auth: "naveen:11e5ea12fde486b8d9059fbad9da6894-us6"
+    auth: "naveen:"+process.env.API_KEY
   };
   var request = https.request(url,options,function(response){
     if (response.statusCode === 200){
@@ -59,6 +60,4 @@ app.listen(process.env.PORT || 3000,function(){
   console.log("server is running on port 3000");
 })
 
-// API key = 11e5ea12fde486b8d9059fbad9da6894-us6
-// list id = 3393ebf4a0
 // link for the app: https://secure-savannah-61727.herokuapp.com/
