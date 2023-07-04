@@ -34,24 +34,27 @@ app.post("/", function(req,res){
   };
   var request = https.request(url,options,function(response){
     if (response.statusCode === 200){
-      res.sendFile(__dirname + "/success.html");
-    }
-    else{
-      res.sendFile(__dirname + "/failure.html");
+      res.redirect("/success");
     }
     response.on("data",function(data){
           console.log(JSON.parse(data));
 
     });
   });
+  request.on('error', (error) => {
+    res.redirect("/failure");
+  });
   request.write(memberDetailsJSON);
   request.end();
 });
 
-app.post("/failure",function(req,res){
-  res.sendFile(__dirname+"/signUp.html");
-})
+app.get("/success",(req,res)=>{
+  res.sendFile(__dirname + "/success.html");
+});
 
+app.get("/failure",(req,res)=>{
+  res.sendFile(__dirname + "/failure.html");
+});
 
 
 app.listen(process.env.PORT || 3000,function(){
