@@ -43,9 +43,7 @@ app.post("/", function(req,res){
           console.log(JSON.parse(data));
 
     });
-    console.log("check 1");
   });
-  console.log("check 2");
   request.write(memberDetailsJSON);
   request.end();
 });
